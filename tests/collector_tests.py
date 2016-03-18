@@ -117,6 +117,7 @@ class CollectorUnitTests(unittest.TestCase):
     def test_max_length_enforced(self):
         request = testing.DummyRequest()
         request.environ["REMOTE_ADDR"] = "1.2.3.4"
+        request.client_addr = "2.3.4.5"
         request.content_length = 500 * 1024 + 1
         response = self.collector.process_request(request)
         self.assertEqual(response.status_code, 413)
